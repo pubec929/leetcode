@@ -42,20 +42,7 @@ class Solution:
             if l is None and r is None:
                 break
 
-            if l is None:
-                newNode = ListNode(r.val)
-                node.next = newNode
-                node = node.next
-                r = r.next
-                continue
-
-            if r is None:
-                newNode = ListNode(l.val)
-                node.next = newNode
-                node = node.next
-                l = l.next
-                continue
-            if l.val < r.val:
+            if r is None or (l is not None and l.val < r.val):
                 newNode = ListNode(l.val)
                 node.next = newNode
                 node = node.next
@@ -70,8 +57,8 @@ class Solution:
         return head
 
 if __name__ == "__main__":
-    list1 = arrayToList([1, 2, 4])
-    list2 = arrayToList([1, 3, 4])
+    list1 = arrayToList([1])
+    list2 = arrayToList([2])
     sol = Solution()
     node = sol.mergeTwoLists(list1, list2)
     loop(node)
