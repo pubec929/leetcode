@@ -53,7 +53,7 @@ class Solution:
 
 if __name__ == "__main__":
     sol = Solution()
-    array = [6, 6, 6, 6]
+    array = [2, 6, 6, 6, 6, 1]
     val = 6
     newList = sol.removeElements(arrayToList(array), val)
     print(listToArray(newList))
