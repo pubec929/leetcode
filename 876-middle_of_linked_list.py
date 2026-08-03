@@ -35,22 +35,8 @@ class Solution:
 
         length = getLength(head)
         pos = length // 2
-        """
-        i = 0
-        node = head
-        while i < pos:
-            i += 1
-            node = node.next
-        """
+       
         node = head
         for _ in range(pos):
             node = node.next
         return node
-
-
-if __name__ == "__main__":
-    array = [1, 2, 3, 4, 5]
-    head = arrayToList(array)
-    sol = Solution()
-    node = sol.middleNote(head)
-    print(node.val)
