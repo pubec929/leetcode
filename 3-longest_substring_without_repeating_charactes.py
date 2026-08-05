@@ -6,13 +6,12 @@ class Solution:
             return 0
         maxLength = 0
         l, r = 0, 0
-        for char in s:
-            if (pos := s.find(char, l, r)) != -1:
+        last_seen: dict[str, int] = {}
+        for i, char in enumerate(s):
+            if char in last_seen and (pos := last_seen[char]) >= l:
                 maxLength = max(r - l, maxLength)
                 l = pos + 1
+            last_seen[char] = i
             r += 1
         return max(r - l, maxLength)
             
-sol = Solution()
-s = "cdcda"
-print(sol.lengthOfLongestSubstring(s))
