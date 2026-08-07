@@ -18,25 +18,21 @@ class Solution:
             1000: "M"
         }
         roman = ""
-        idx = 0
-        def addRoman(num: int, roman):
-            prev = list(table.items())[idx]
-            for curr in list(table.items())[1:]:
-                val, _ = curr
-                if val > num:
-                    break
-                prev = curr
+        idx = len(table) - 1
 
-            val, literal = prev
-            quant = num // val
-            roman += quant * literal
-            num -= quant * val
-            return num, roman
+        keys = list(table.keys())
+        literals = list(table.values())
             
         while num >= 1:
-            num, roman = addRoman(num, roman)
+            while (val := keys[idx]) > num:
+                idx -= 1
+            
+            quant = num // val
+            roman += literals[idx] * quant
+            num -= quant * val
+
         return roman
 
 
 sol = Solution()
-print(sol.intToRoman(999))
+print(sol.intToRoman(1001))
