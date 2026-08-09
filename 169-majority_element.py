@@ -2,4 +2,14 @@
 
 class Solution:
     def majorityElement(self, nums: list[int]) -> int:
-        return sorted(nums)[len(nums) // 2]
+        candidate = 0
+        count = 0
+        for n in nums:
+            if not count:
+                candidate = n
+
+            if n == candidate:
+                count += 1
+            else:
+                count -= 1
+        return candidate
