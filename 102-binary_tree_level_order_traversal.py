@@ -15,17 +15,16 @@ class Solution:
         vals = []
         queue = deque([root])
         while queue:
-            newQueue = deque()
-            currentVals = []
-            while queue:
+            level = []
+            levelLength = len(queue)
+            for _ in range(levelLength):
                 node = queue.popleft()
-                currentVals.append(node.val)
+                level.append(node.val)
                 if node.left:
-                    newQueue.append(node.left)
+                    queue.append(node.left)
                 if node.right:
-                    newQueue.append(node.right)
-            vals.append(currentVals)
-            queue = newQueue
+                    queue.append(node.right)
+            vals.append(level)
         return vals
 
 root = TreeNode(3)
