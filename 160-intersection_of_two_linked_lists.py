@@ -8,21 +8,10 @@ class ListNode:
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
-        seen = set()
-
         nodeA, nodeB = headA, headB
-        while nodeA or nodeB:
-            if nodeA:
-                addrA = id(nodeA)
-                if addrA in seen:
-                    return nodeA
-                seen.add(addrA)
-                nodeA = nodeA.next
-            if nodeB:
-                addrB = id(nodeB)
-                if addrB in seen:
-                    return nodeB
-                seen.add(addrB)
-                nodeB = nodeB.next
 
-        return ListNode(0)
+        while nodeA is not nodeB:
+            nodeA = nodeA.next if nodeA else headB
+            nodeB = nodeB.next if nodeB else headA
+
+        return nodeA
