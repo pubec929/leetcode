@@ -3,30 +3,18 @@ from collections import Counter
 
 class Solution:
     def findShortestSubArray(self, nums: list[int]) -> int:
-        c = Counter()
+        c = Counter(nums)
         first = {}
         last = {}
-
+        
         for i, n in enumerate(nums):
-            c[n] += 1
-            if n not in first:
-                first[n] = i
-            
-            last[n] = max(getattr(last, str(n), 0), i)
+            first.setdefault(n, i)
+            last[n] = i
 
-        c = sorted(c.items(), reverse=True, key=lambda i: i[1])
-        degrees = c[0][1]
-        length = None
-        for n, count in c:
-            if count < degrees:
-                break
-
-            l, r = first[n], last[n]
-            if length is None:
-                length = r - l + 1
-            else:
+        degree = max(c.values())
+        length = len(nums)
+        for n, count in c.items():
+            if count == degree:
+                l, r = first[n], last[n]
                 length = min(length, r - l + 1)
         return length
-
-nums = [1, 2, 2, 3, 1]
-print(Solution().findShortestSubArray(nums))
