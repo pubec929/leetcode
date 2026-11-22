@@ -2,28 +2,22 @@
 
 class Solution:
     def twoSum(self, numbers: list[int], target: int) -> list[int]:
-        r = 1
-        for l in range(0, len(numbers)):
+        for l in range(0, len(numbers) - 1):
+            s = numbers[l] + numbers[l + 1]
+            if s == target:
+                return [l + 1, l + 2]
+            if s > target:
+                break
+        else:
+            return [-1, -1]
+        r = l + 1
+        while l >= 0 and s > target:
             s = numbers[l] + numbers[r]
             if s == target:
                 return [l + 1, r + 1]
-            elif s < target:
-                while s < target:
-                    if r + 1 >= len(numbers):
-                        break
-                    r += 1
-                    s = numbers[l] + numbers[r]
-                    if s == target:
-                        return [l + 1, r + 1]
-            else:
-                while r >= 0 and r > l and s > target:
-                    r -= 1
-                    s = numbers[l] + numbers[r]
-                    if s == target:
-                        return [l + 1, r + 1]
-
+            l -= 1
         return [-1, -1]
         
-numbers = [1,2,3,4,4,9,56,90]
-target = 8
+numbers = [-5,-3,0,2,4,6,8]
+target = 5
 print(Solution().twoSum(numbers, target))
