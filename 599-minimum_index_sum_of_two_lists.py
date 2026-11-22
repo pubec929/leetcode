@@ -8,13 +8,6 @@ class Solution:
             if name in seen:
                 seen_twice[name] = seen[name] + idx
 
-        lowest = float("Inf")
-        output = []
-        for name, idx in seen_twice.items():
-            if idx < lowest:
-                output = [name]
-                lowest = idx
-            elif idx == lowest:
-                output.append(name)
-        return output
+        lowest = min(seen_twice.values())
+        return [name for name, idx in seen_twice.items() if idx == lowest]
 
